@@ -1,4 +1,4 @@
-# Project Name
+# CSCI927 LAM001 APIs service
 
 ## Description
 
@@ -13,9 +13,8 @@ This project procides flight ticket booking for CSCI927 LAM001 service.
 ## Table of Contents
 
 - [Installation](#installation)
+- [Project setup](#setup)
 - [Scripts](#scripts)
-- [Development](#development)
-- [Build](#build)
 
 
 ## Installation
@@ -32,10 +31,12 @@ This project procides flight ticket booking for CSCI927 LAM001 service.
     npm install
     ```
 
-3. **Install TypeScript globally (if not already installed)**:
-    ```bash
-    npm install -g typescript
-    ```
+## Setup
+
+To set up the project edit .env file to connect with your local database.
+
+After that run dbCreate.sql file to create database schema with fake data to get started.
+
 
 ## Scripts
 
