@@ -1,0 +1,356 @@
+openapi: 3.0.0
+info:
+  title: CSCI927-LAM001 Flight Ticketing API
+  description: This API allows users to view available flights, insurances, luggages, create tickets, and update ticket payment status.
+  version: 1.0.0
+
+servers:
+  - url: https://api.csci927-lam001.com
+
+paths:
+  /api/flights:
+    get:
+      summary: Get available flights
+      description: Returns a list of available flights based on search parameters.
+      parameters:
+        - name: departure_time
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Departure time of the flight
+        - name: arrival_time
+          in: query
+          schema:
+            type: string
+          description: Arrival time of the flight (optional)
+        - name: departure_airport_code
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Code of the departure airport
+        - name: arrival_airport_code
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Code of the arrival airport
+      responses:
+        '200':
+          description: Array of available flights
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    flight_id:
+                      type: integer
+                    departure_time:
+                      type: string
+                    arrival_time:
+                      type: string
+                    departure_airport_code:
+                      type: string
+                    arrival_airport_code:
+                      type: string
+                    price:
+                      type: number
+                    currency:
+                      type: string
+                    aircraft_id:
+                      type: integer
+                    model:
+                      type: string
+                    start_row_letter:
+                      type: string
+                    end_row_letter:
+                      type: string
+                    seat_per_row:
+                      type: integer
+                    provider_name:
+                      type: string
+                    provider_country:
+                      type: string
+
+  /api/insurances:
+    get:
+      summary: Get available insurances
+      description: Returns a list of available insurance options.
+      responses:
+        '200':
+          description: Array of available insurances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    insurance_id:
+                      type: integer
+                    price:
+                      type: number
+                    type:
+                      type: string
+
+  /api/luggages:
+    get:
+      summary: Get available luggages
+      description: Returns a list of available luggages that can be bought.
+      responses:
+        '200':
+          description: Array of available luggages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    luggage_id:
+                      type: integer
+                    price:
+                      type: number
+                    weight:
+                      type: number
+
+  /api/ticket:
+    post:
+      summary: Create a new ticket
+      description: Allows users to create a new ticket for a flight.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                seat_name:
+                  type: string
+                seat_type:
+                  type: string
+                seat_price:
+                  type: number
+                flight_id:
+                  type: string
+                luggage_type_id:
+                  type: integer
+                  nullable: true
+                insurance_type_id:
+                  type: integer
+                  nullable: true
+      responses:
+        '201':
+          description: Ticket created successfully
+        '400':
+          description: Invalid request parameters
+
+  /api/tickets:
+    get:
+      summary: Get tickets by email
+      description: Returns a list of tickets reserved by the provided email.
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Email to get the list of tickets
+      responses:
+        '200':
+          description: List of reserved tickets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ticket_id:
+                      type: integer
+                    email:
+                      type: string
+                    first_name:
+                      type: string
+                      nullable: true
+                    last_name:
+                      type: string
+                      nullable: true
+                    created_date:
+                      type: string
+                    paid_status:
+                      type: boolean
+                    paid_date:
+                      type: string
+                    departure_time:
+                      type: string
+                    arrival_time:
+                      type: string
+                    departure_airport_code:
+                      type: string
+                    arrival_airport_code:
+                      type: string
+                    seat_name:
+                      type: string
+                    seat_price:
+                      type: number
+                    seat_type:
+                      type: string
+                    luggage_type_id:
+                      type: integer
+                      nullable: true
+                    insurance_type_id:
+                      type: integer
+                      nullable: true
+
+  /api/ticket/pay:
+    put:
+      summary: Update ticket paid status
+      description: Allows updating the paid status of a ticket.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                amount:
+                  type: number
+                ticket_id:
+                  type: integer
+      responses:
+        '200':
+          description: Ticket paid status updated successfully
+        '400':
+          description: Invalid request parameters
+
+components:
+  schemas:
+    Flight:
+      type: object
+      properties:
+        flight_id:
+          type: integer
+        departure_time:
+          type: string
+        arrival_time:
+          type: string
+        departure_airport_code:
+          type: string
+        arrival_airport_code:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        aircraft_id:
+          type: integer
+        model:
+          type: string
+        start_row_letter:
+          type: string
+        end_row_letter:
+          type: string
+        seat_per_row:
+          type: integer
+        provider_name:
+          type: string
+        provider_country:
+          type: string
+
+    Insurance:
+      type: object
+      properties:
+        insurance_id:
+          type: integer
+        price:
+          type: number
+        type:
+          type: string
+
+    Luggage:
+      type: object
+      properties:
+        luggage_id:
+          type: integer
+        price:
+          type: number
+        weight:
+          type: number
+
+    AddTicketPayload:
+      type: object
+      properties:
+        email:
+          type: string
+        seat_name:
+          type: string
+        seat_type:
+          type: string
+        seat_price:
+          type: number
+        flight_id:
+          type: string
+        luggage_type_id:
+          type: integer
+          nullable: true
+        insurance_type_id:
+          type: integer
+          nullable: true
+
+    Ticket:
+      type: object
+      properties:
+        ticket_id:
+          type: integer
+        email:
+          type: string
+        first_name:
+          type: string
+          nullable: true
+        last_name:
+          type: string
+          nullable: true
+        created_date:
+          type: string
+        paid_status:
+          type: boolean
+        paid_date:
+          type: string
+        departure_time:
+          type: string
+        arrival_time:
+          type: string
+        departure_airport_code:
+          type: string
+        arrival_airport_code:
+          type: string
+        seat_name:
+          type: string
+        seat_price:
+          type: number
+        seat_type:
+          type: string
+        luggage_type_id:
+          type: integer
+          nullable: true
+        insurance_type_id:
+          type: integer
+          nullable: true
+
+    PayTicketPayload:
+      type: object
+      properties:
+        email:
+          type: string
+        amount:
+          type: number
+        ticket_id:
+          type: integer
