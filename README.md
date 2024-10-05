@@ -15,6 +15,7 @@ This project procides flight ticket booking for CSCI927 LAM001 service.
 - [Installation](#installation)
 - [Project setup](#setup)
 - [Scripts](#scripts)
+- [API Documents](#apidocs)
 
 
 ## Installation
@@ -45,4 +46,6 @@ Here are some useful scripts you can run:
 - **`npm run dev`**: Runs the project in development mode.
 - **`npm run production`**: Runs the project in production mode.
 
+## API Documents
 
+To view apis document copy content of the apis_document.yml file in the root directory to SWAGGER viewer at https://editor.swagger.io/
