@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "f9dd66bd-0ee8-4c86-a25a-a11721561bde",
+		"name": "LAM001",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38355460"
+	},
+	"item": [
+		{
+			"name": "tickets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tickets?email=example@example.com",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tickets"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "example@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insurances",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/insurances",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"insurances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "luggages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/luggages",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"luggages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "flights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/flights?departure_airport_code=SYD&arrival_airport_code=SGN&departure_time=2024-09-25",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"flights"
+					],
+					"query": [
+						{
+							"key": "departure_airport_code",
+							"value": "SYD"
+						},
+						{
+							"key": "arrival_airport_code",
+							"value": "SGN"
+						},
+						{
+							"key": "departure_time",
+							"value": "2024-09-25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"example@example.com\",\r\n  \"seat_name\": \"A4\",\r\n  \"seat_type\": \"Economy\",\r\n  \"seat_price\": 100,\r\n  \"flight_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/ticket",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay ticket",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"example@example.com\",\r\n  \"amount\": 900,\r\n  \"ticket_id\": 25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/ticket/pay",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"ticket",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
