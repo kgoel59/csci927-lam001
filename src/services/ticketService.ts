@@ -175,7 +175,7 @@ seat.price as seat_price
   }
   // Update the paid_status
   await pool.query(
-    "UPDATE Ticket SET paid_status = 1, paid_date = NOW() WHERE ticket_id = ?",
+    "UPDATE ticket SET paid_status = 1, paid_date = NOW() WHERE ticket_id = ?",
     [payload.ticket_id]
   );
 };
